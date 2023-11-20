@@ -1,29 +1,28 @@
 package bg.project.petsittingapp.model.dto;
 
 import bg.project.petsittingapp.model.entity.User;
+import bg.project.petsittingapp.validation.ImageAnnotation;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDate;
 
 public class CreateArticleDTO {
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Enter title")
+    @NotBlank(message = "Enter title")
     private String title;
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Enter header")
+    @NotBlank(message = "Enter header")
     private String header;
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Enter body")
+    @NotBlank(message = "Enter body")
     private String body;
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Enter footer")
+    @NotBlank(message = "Enter footer")
     private String footer;
-    @NotNull
-    @NotBlank
-
+//    @NotBlank(message = "choose picture")
+    @ImageAnnotation(contentTypes = {"image/jpeg", "image/png"})
     private MultipartFile picture;
-    @NotNull
     private User author;
     @NotNull
     private LocalDate created;
@@ -36,27 +35,55 @@ public class CreateArticleDTO {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getHeader() {
         return header;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
     }
 
     public String getBody() {
         return body;
     }
 
+    public void setBody(String body) {
+        this.body = body;
+    }
+
     public String getFooter() {
         return footer;
+    }
+
+    public void setFooter(String footer) {
+        this.footer = footer;
     }
 
     public MultipartFile getPicture() {
         return picture;
     }
 
+    public void setPicture(MultipartFile picture) {
+        this.picture = picture;
+    }
+
     public User getAuthor() {
         return author;
     }
 
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
     public LocalDate getCreated() {
         return created;
+    }
+
+    public void setCreated(LocalDate created) {
+        this.created = created;
     }
 }

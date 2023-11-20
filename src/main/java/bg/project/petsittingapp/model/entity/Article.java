@@ -12,7 +12,7 @@ public class Article extends BaseEntity {
     private String title;
     @Column(nullable = false, columnDefinition = "text")
     private String header;
-    @Column(nullable = false, columnDefinition = "text")
+    @Column(nullable = false, columnDefinition = "longtext")
     private String body;
     @Column(nullable = false, columnDefinition = "text")
     private String footer;

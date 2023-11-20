@@ -23,18 +23,9 @@ public class DemoController {
         return new ModelAndView("gallery");
     }
 
-    @GetMapping("/pricing")
-    public ModelAndView pricing() {
-        return new ModelAndView("pricing");
-    }
 
     @GetMapping("/services")
     public ModelAndView cervices() {
         return new ModelAndView("services");
-    }
-
-    @GetMapping("/vet")
-    public ModelAndView vet() {
-        return new ModelAndView("vet");
     }
 }
