@@ -29,13 +29,13 @@ public class UserController {
                                      @Valid UserRegisterBindingModel userRegisterBindingModel, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return new ModelAndView("redirect:/register");
+            return new ModelAndView("register");
         }
 
         boolean hasPasswordsMatch = userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword());
 
         if (!hasPasswordsMatch) {
-            ModelAndView modelAndView = new ModelAndView("redirect:/register");
+            ModelAndView modelAndView = new ModelAndView("register");
             modelAndView.addObject("passwordsNotMatch", true);
             return modelAndView;
         }
@@ -43,7 +43,7 @@ public class UserController {
         boolean registrationSuccessful = userService.register(userRegisterBindingModel);
 
         if (!registrationSuccessful) {
-            return new ModelAndView("redirect:/register");
+            return new ModelAndView("register");
         }
 
         return new ModelAndView("redirect:/login");

@@ -15,9 +15,9 @@
         <div class="row no-gutters slider-text align-items-end">
             <div class="col-md-9 ftco-animate pb-5">
                 <p class="breadcrumbs mb-2"><span class="mr-2"><a th:href="@{/}">Home <i
-                        class="ion-ios-arrow-forward"></i></a></span> <span>Create Article <i
+                        class="ion-ios-arrow-forward"></i></a></span> <span>Edit Article <i
                         class="ion-ios-arrow-forward"></i></span></p>
-                <h1 class="mb-0 bread">Create Article</h1>
+                <h1 class="mb-0 bread">Edit Article</h1>
             </div>
         </div>
     </div>
@@ -28,11 +28,11 @@
         <div class="row no-gutters">
             <div class="col-md-7">
                 <div class="contact-wrap w-100 p-md-5 p-4">
-                    <h3 class="mb-4">Create Article</h3>
-                    <form id="createArticle" name="create" class="registerForm" enctype="multipart/form-data"
+                    <h3 class="mb-4">Edit Article</h3>
+                    <form id="editArticle" name="edit" class="registerForm" enctype="multipart/form-data"
                         th:method="POST"
-                        th:action="@{/blog/create}"
-                        th:object="${createArticleDTO}">
+                        th:action="@{/blog/article/edit/save/{id}(id=${articleDTO.getId()})}"
+                        th:object="${articleDTO}">
 
                         <div class="row">
                             <div class="col-md-12">
@@ -83,13 +83,13 @@
                                                th:name="picture"
                                                th:field="*{picture}">
                                     <br/>
-                                    <small th:if="${#fields.hasErrors()}" th:errors="*{picture}" class="text-danger">Picture error message</small>
+                                    <small th:if="${#fields.hasErrors()}" class="text-danger">Picture error message</small>
                                 </div>
-                                <div class="my-md-3" id="divImageMediaPreview"></div>
+<!--                                <div id="divImageMediaPreview"></div>-->
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="submit" value="create" class="btn btn-primary">
+                                    <input type="submit" value="Save Article" class="btn btn-primary">
                                     <div class="submitting"></div>
                                 </div>
                             </div>
@@ -98,7 +98,11 @@
                 </div>
             </div>
             <div class="col-md-5 d-flex align-items-stretch">
-                <div class="info-wrap w-100 p-5 img" style="background-image: url(/images/img-add.jpg);">
+<!--                <div class="info-wrap w-100 p-5" th:style="'background-image:url(' + '/images/articlePictures/' + ${articleDTO.getPictureURL()} + ');'">-->
+<!--                </div>-->
+                <div>
+                    <img th:src="@{'/images/articlePictures/' + ${articleDTO.getPictureURL()}}" alt="image" class="img-fluid" src="">
+                    <div id="divImageMediaPreview"></div>
                 </div>
             </div>
         </div>

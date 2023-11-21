@@ -22,7 +22,7 @@ $(document).on('change', '.file-input', function() {
             var reader = new FileReader();
             reader.onload = function (e) {
                 var img = $("<img />");
-                img.attr("style", "width: 150px; height:100px; padding: 10px");
+                img.attr("style", "width: 100%;");
                 img.attr("src", e.target.result);
                 dvPreview.append(img);
             }

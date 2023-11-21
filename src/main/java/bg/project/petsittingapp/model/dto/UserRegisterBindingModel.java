@@ -11,7 +11,7 @@ public class UserRegisterBindingModel {
     @NotNull
     @UniqueUsername(message = "Username already taken!")
     @Size(min = 4, max = 20, message = "Username length must be between 4 and 20 characters!")
-    @NotBlank(message = "Username length must be between 4 and 20 characters!")
+    @NotBlank(message = "Username cannot be empty!")
     private String username;
 
     @Email
@@ -22,7 +22,7 @@ public class UserRegisterBindingModel {
 
     @NotNull
     @Size(min = 3, max = 20, message = "Password length must be between 3 and 20 characters!")
-    @NotBlank(message = "Password length must be between 3 and 20 characters!")
+    @NotBlank(message = "Password cannot be empty!")
     private String password;
 
     @NotNull

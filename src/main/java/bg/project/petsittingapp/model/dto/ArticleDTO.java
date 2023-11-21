@@ -1,5 +1,7 @@
 package bg.project.petsittingapp.model.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 public class ArticleDTO {
@@ -9,6 +11,7 @@ public class ArticleDTO {
     private String body;
     private String footer;
     private String pictureURL;
+    private MultipartFile picture;
     private String created;
     private String authorName;
     private List<CommentDTO> comments;
@@ -62,6 +65,14 @@ public class ArticleDTO {
 
     public void setPictureURL(String pictureURL) {
         this.pictureURL = pictureURL;
+    }
+
+    public MultipartFile getPicture() {
+        return picture;
+    }
+
+    public void setPicture(MultipartFile picture) {
+        this.picture = picture;
     }
 
     public String getCreated() {

@@ -13,8 +13,8 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-end">
           <div class="col-md-9 ftco-animate pb-5">
-          	<p class="breadcrumbs mb-2"><span class="mr-2"><a th:href="@{/}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span class="mr-2"><a href="blog.html">Blog <i class="ion-ios-arrow-forward"></i></a></span> <span>Blog Single <i class="ion-ios-arrow-forward"></i></span></p>
-            <h1 class="mb-0 bread">Blog</h1>
+          	<p class="breadcrumbs mb-2"><span class="mr-2"><a th:href="@{/}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span class="mr-2"><a href="blog.html">Blog <i class="ion-ios-arrow-forward"></i></a></span> <span>Article <i class="ion-ios-arrow-forward"></i></span></p>
+            <h1 class="mb-0 bread">Article</h1>
           </div>
         </div>
       </div>
@@ -23,22 +23,21 @@
     <section class="ftco-section ftco-degree-bg">
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 ftco-animate">
+          <div th:object="${articleDTO}" class="col-lg-8 ftco-animate">
           	<p>
-              <img src="/images/image_1.jpg" alt="" class="img-fluid">
+              <img th:src="@{'/images/articlePictures/' + ${articleDTO.getPictureURL()}}" alt="image" class="img-fluid">
             </p>
-            <h2 class="mb-3">It is a long established fact a reader be distracted</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, eius mollitia suscipit, quisquam doloremque distinctio perferendis et doloribus unde architecto optio laboriosam porro adipisci sapiente officiis nemo accusamus ad praesentium? Esse minima nisi et. Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
-            <p>Molestiae cupiditate inventore animi, maxime sapiente optio, illo est nemo veritatis repellat sunt doloribus nesciunt! Minima laborum magni reiciendis qui voluptate quisquam voluptatem soluta illo eum ullam incidunt rem assumenda eveniet eaque sequi deleniti tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor minima esse vero ut ea, repudiandae suscipit!</p>
-            <h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2>
-            <p>Temporibus ad error suscipit exercitationem hic molestiae totam obcaecati rerum, eius aut, in. Exercitationem atque quidem tempora maiores ex architecto voluptatum aut officia doloremque. Error dolore voluptas, omnis molestias odio dignissimos culpa ex earum nisi consequatur quos odit quasi repellat qui officiis reiciendis incidunt hic non? Debitis commodi aut, adipisci.</p>
-            <p>
-              <img src="/images/image_2.jpg" alt="" class="img-fluid">
-            </p>
-            <p>Quisquam esse aliquam fuga distinctio, quidem delectus veritatis reiciendis. Nihil explicabo quod, est eos ipsum. Unde aut non tenetur tempore, nisi culpa voluptate maiores officiis quis vel ab consectetur suscipit veritatis nulla quos quia aspernatur perferendis, libero sint. Error, velit, porro. Deserunt minus, quibusdam iste enim veniam, modi rem maiores.</p>
-            <p>Odit voluptatibus, eveniet vel nihil cum ullam dolores laborum, quo velit commodi rerum eum quidem pariatur! Quia fuga iste tenetur, ipsa vel nisi in dolorum consequatur, veritatis porro explicabo soluta commodi libero voluptatem similique id quidem? Blanditiis voluptates aperiam non magni. Reprehenderit nobis odit inventore, quia laboriosam harum excepturi ea.</p>
-            <p>Adipisci vero culpa, eius nobis soluta. Dolore, maxime ullam ipsam quidem, dolor distinctio similique asperiores voluptas enim, exercitationem ratione aut adipisci modi quod quibusdam iusto, voluptates beatae iure nemo itaque laborum. Consequuntur et pariatur totam fuga eligendi vero dolorum provident. Voluptatibus, veritatis. Beatae numquam nam ab voluptatibus culpa, tenetur recusandae!</p>
-            <p>Voluptas dolores dignissimos dolorum temporibus, autem aliquam ducimus at officia adipisci quasi nemo a perspiciatis provident magni laboriosam repudiandae iure iusto commodi debitis est blanditiis alias laborum sint dolore. Dolores, iure, reprehenderit. Error provident, pariatur cupiditate soluta doloremque aut ratione. Harum voluptates mollitia illo minus praesentium, rerum ipsa debitis, inventore?</p>
+            <h2 th:text="${articleDTO.title}" class="mb-3">Title</h2>
+            <p th:text="${articleDTO.header}">Header</p>
+            <p th:text="${articleDTO.body}">Body</p>
+            <p th:text="${articleDTO.footer}">Footer</p>
+
+            <div sec:authorize="hasRole('ADMIN')" class="container row d-flex">
+              <form th:method="DELETE" th:action="@{/blog/article/{id}(id=${articleDTO.getId()})}">
+                <button class="btn btn-danger" type="submit" th:text="Delete"></button>
+              </form>
+              <a class="btn btn-success ml-3" th:href="@{/blog/article/edit/{id}(id=${articleDTO.getId()})}">Edit</a>
+            </div>
             <div class="tag-widget post-tag-container mb-5 mt-5">
               <div class="tagcloud">
                 <a href="#" class="tag-cloud-link">Life</a>
@@ -184,45 +183,27 @@
             <div class="sidebar-box ftco-animate">
               <div class="categories">
                 <h3>Services</h3>
-                <li><a href="#">Pet Sitting <span class="fa fa-chevron-right"></span></a></li>
-                <li><a href="#">Pet Daycare <span class="fa fa-chevron-right"></span></a></li>
-                <li><a href="#">Pet Grooming <span class="fa fa-chevron-right"></span></a></li>
-                <li><a href="#">Pet Spa <span class="fa fa-chevron-right"></span></a></li>
+                <li><a th:href="@{/services}">Pet Sitting <span class="fa fa-chevron-right"></span></a></li>
+                <li><a th:href="@{/services}">Dog Walking <span class="fa fa-chevron-right"></span></a></li>
+                <li><a th:href="@{/services}">Pet Training <span class="fa fa-chevron-right"></span></a></li>
+                <li><a th:href="@{/services}">Spa & Grooming <span class="fa fa-chevron-right"></span></a></li>
+                <li><a th:href="@{/services}">Pet Daycare <span class="fa fa-chevron-right"></span></a></li>
+                <li><a th:href="@{/services}">Pet Medicine <span class="fa fa-chevron-right"></span></a></li>
               </div>
             </div>
 
             <div class="sidebar-box ftco-animate">
               <h3>Recent Blog</h3>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(/images/image_1.jpg);"></a>
+              <div th:each="article: ${blogDTO.getArticles()}" class="block-21 mb-4 d-flex">
+                <a th:href="@{/blog/article/{id}(id=${article.getId()})}" class="blog-img mr-4"
+                   th:style="'background-image:url(' + '/images/articlePictures/' + ${article.getPictureURL()} + ');'">
+                </a>
                 <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <h3 class="heading"><a th:href="@{/blog/article/{id}(id=${article.getId()})}" th:text="${article.title}">Title</a></h3>
                   <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> April 7, 2020</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(/images/image_2.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> April 7, 2020</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(/images/image_3.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> April 7, 2020</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                    <div><a th:text="${article.getCreated()}"><span class="icon-calendar"></span> Created</a></div>
+                    <div><a th:text="${article.getAuthorName()}"><span class="icon-person"></span> Author</a></div>
+                    <div><a th:text="${article.getComments().size()}"><span class="icon-chat"></span> Comments</a></div>
                   </div>
                 </div>
               </div>

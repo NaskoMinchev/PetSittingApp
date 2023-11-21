@@ -1,5 +1,6 @@
 package bg.project.petsittingapp.web;
 
+import bg.project.petsittingapp.model.dto.ArticleDTO;
 import bg.project.petsittingapp.model.dto.BlogDTO;
 import bg.project.petsittingapp.model.dto.CreateArticleDTO;
 import bg.project.petsittingapp.model.entity.User;
@@ -8,13 +9,11 @@ import bg.project.petsittingapp.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Controller
@@ -38,25 +37,36 @@ public class BlogController {
         return modelAndView;
     }
 
-    @GetMapping("/blog-single/{id}")
+    @GetMapping("/blog/article/{id}")
     public ModelAndView blogSingle(@PathVariable("id") Long id) {
-        return new ModelAndView("blog-single");
+
+        ArticleDTO articleDTO = articleService.getSingleArticle(id);
+
+        BlogDTO blogDTO = articleService.getAllArticles();
+        blogDTO.setArticles(blogDTO.getArticles().subList(0, 3));
+
+        ModelAndView modelAndView = new ModelAndView("blog-single");
+        modelAndView.addObject(articleDTO);
+        modelAndView.addObject(blogDTO);
+
+        return modelAndView;
     }
 
-    @GetMapping("/blog-create")
+    @GetMapping("/blog/create")
     public ModelAndView createArticle(@ModelAttribute("createArticleDTO") CreateArticleDTO createArticleDTO) {
         return new ModelAndView("blog-create");
     }
 
-    @PostMapping("/blog-create")
-    public ModelAndView createArticle(@ModelAttribute("createArticleDTO") @Valid CreateArticleDTO createArticleDTO, BindingResult bindingResult, Principal principal) {
+    @PostMapping("/blog/create")
+    public ModelAndView createArticle(@ModelAttribute("createArticleDTO") @Valid CreateArticleDTO createArticleDTO,
+                                      BindingResult bindingResult, Principal principal) {
 
         Optional<User> user = userService.findByUsername(principal.getName());
 
         if (user.isPresent()) {
             createArticleDTO.setAuthor(user.get());
         } else {
-            throw new IllegalArgumentException("No such user");
+            throw new NoSuchElementException("No such user");
         }
 
         if (bindingResult.hasErrors()) {
@@ -64,6 +74,33 @@ public class BlogController {
         }
 
         articleService.create(createArticleDTO);
+
+        return new ModelAndView("redirect:/blog");
+    }
+
+    @DeleteMapping("/blog/article/{id}")
+    public ModelAndView deleteArticle(@PathVariable("id") Long id) {
+
+        articleService.deleteArticle(id);
+
+        return new ModelAndView("redirect:/blog");
+    }
+
+    @GetMapping("/blog/article/edit/{id}")
+    public ModelAndView editArticle(@PathVariable("id") Long id) {
+
+        ArticleDTO articleDTO = articleService.getSingleArticle(id);
+
+        ModelAndView modelAndView = new ModelAndView("blog-edit");
+        modelAndView.addObject(articleDTO);
+
+        return modelAndView;
+    }
+
+    @PostMapping("/blog/article/edit/save/{id}")
+    public ModelAndView saveEditedArticle(@ModelAttribute("articleDTO") ArticleDTO articleDTO) {
+
+        articleService.editArticle(articleDTO);
 
         return new ModelAndView("redirect:/blog");
     }

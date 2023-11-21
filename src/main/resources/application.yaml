@@ -16,6 +16,10 @@ spring:
     password: ${db_password}
     username: ${db_username}
     url: jdbc:mysql://localhost:3306/petSitting?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+  web:
+      resources:
+        static-locations[0]: "file:src/main/resources/static/"
+        static-locations[1]: "classpath:/static/"
 logging:
   level:
     org:

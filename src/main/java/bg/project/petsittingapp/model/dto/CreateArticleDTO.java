@@ -9,18 +9,18 @@ import java.time.LocalDate;
 
 public class CreateArticleDTO {
     @NotNull(message = "Enter title")
-    @NotBlank(message = "Enter title")
+    @NotBlank(message = "Title can not be blank!")
     private String title;
     @NotNull(message = "Enter header")
-    @NotBlank(message = "Enter header")
+    @NotBlank(message = "Header can not be blank!")
     private String header;
-    @NotNull(message = "Enter body")
-    @NotBlank(message = "Enter body")
+    @NotNull(message = "Enter body!")
+    @NotBlank(message = "Body can not be blank!")
     private String body;
-    @NotNull(message = "Enter footer")
-    @NotBlank(message = "Enter footer")
+    @NotNull(message = "Enter footer!")
+    @NotBlank(message = "Footer can not be blank!")
     private String footer;
-//    @NotBlank(message = "choose picture")
+    @NotNull(message = "Choose picture!")
     @ImageAnnotation(contentTypes = {"image/jpeg", "image/png"})
     private MultipartFile picture;
     private User author;
