@@ -20,6 +20,14 @@ spring:
       resources:
         static-locations[0]: "file:src/main/resources/static/"
         static-locations[1]: "classpath:/static/"
+
+mail:
+    petSitting: "lapichkata@project.bg"
+    host: localhost
+    port: 1025
+    username: ${mail_username}
+    password: ${mail_password}
+
 logging:
   level:
     org:

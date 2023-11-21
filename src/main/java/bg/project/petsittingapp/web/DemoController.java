@@ -13,11 +13,6 @@ public class DemoController {
         return new ModelAndView("about");
     }
 
-    @GetMapping("/contact")
-    public ModelAndView contact() {
-        return new ModelAndView("contact");
-    }
-
     @GetMapping("/gallery")
     public ModelAndView gallery() {
         return new ModelAndView("gallery");

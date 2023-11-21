@@ -14,10 +14,10 @@ public class UserRegisterBindingModel {
     @NotBlank(message = "Username cannot be empty!")
     private String username;
 
-    @Email
     @NotNull
-    @UniqueEmail(message = "Email already taken!")
+    @Email(message = "Email must be valid!")
     @NotBlank(message = "Email cannot be empty!")
+    @UniqueEmail(message = "Email already taken!")
     private String email;
 
     @NotNull

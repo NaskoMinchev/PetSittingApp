@@ -22,7 +22,7 @@ public class SecurityConfig {
                         authorizeRequest
                             .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                             .requestMatchers("/fonts/**").permitAll()
-                            .requestMatchers("/", "/login", "/register", "/about", "/services", "/contact", "/gallery", "/login-error").permitAll()
+                            .requestMatchers("/", "/login", "/register", "/about", "/services", "/contact", "/contact/send","/gallery", "/login-error").permitAll()
                             .requestMatchers("/blog-create", "/blog-edit").hasRole(RoleEnum.ADMIN.name())
                             .anyRequest().authenticated()
 
