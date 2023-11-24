@@ -101,7 +101,7 @@
 <!--                <div class="info-wrap w-100 p-5" th:style="'background-image:url(' + '/images/articlePictures/' + ${articleDTO.getPictureURL()} + ');'">-->
 <!--                </div>-->
                 <div>
-                    <img th:src="@{'/images/articlePictures/' + ${articleDTO.getPictureURL()}}" alt="image" class="img-fluid" src="">
+                    <img th:src="@{'/images/' + ${articleDTO.getImage().getImageUrl()}}" alt="image" class="img-fluid" src="">
                     <div id="divImageMediaPreview"></div>
                 </div>
             </div>

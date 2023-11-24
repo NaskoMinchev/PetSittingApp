@@ -16,8 +16,8 @@ public class Article extends BaseEntity {
     private String body;
     @Column(nullable = false, columnDefinition = "text")
     private String footer;
-    @Column(nullable = false)
-    private String pictureURL;
+    @OneToOne(optional = false)
+    private Image image;
     @ManyToOne(optional = false)
     private User author;
     @Column(nullable = false)
@@ -60,12 +60,12 @@ public class Article extends BaseEntity {
         this.footer = footer;
     }
 
-    public String getPictureURL() {
-        return pictureURL;
+    public Image getImage() {
+        return image;
     }
 
-    public void setPictureURL(String pictureURL) {
-        this.pictureURL = pictureURL;
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public User getAuthor() {

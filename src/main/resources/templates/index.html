@@ -523,7 +523,7 @@
         <div class="row d-flex">
             <div th:each="article: ${blogDTO.getArticles()}" class="col-md-4 d-flex ftco-animate">
                 <div class="blog-entry align-self-stretch" style="min-width: 100%">
-                    <a th:href="@{/blog/article/{id}(id=${article.getId()})}" class="block-20 rounded" th:style="'background-image:url(' + '/images/articlePictures/' + ${article.getPictureURL()} + ');'">
+                    <a th:href="@{/blog/article/{id}(id=${article.getId()})}" class="block-20 rounded" th:style="'background-image:url(' + '/images/' + ${article.getImage().getImageUrl()} + ');'">
                     </a>
                     <div class="text p-4">
                         <div class="meta mb-2">

@@ -13,10 +13,7 @@ public class DemoController {
         return new ModelAndView("about");
     }
 
-    @GetMapping("/gallery")
-    public ModelAndView gallery() {
-        return new ModelAndView("gallery");
-    }
+
 
 
     @GetMapping("/services")

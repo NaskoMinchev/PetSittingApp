@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/commons::head}"></head>
+
+<body>
+<header th:replace="~{fragments/commons::header}"></header>
+
+<section class="hero-wrap hero-wrap-2" style="background-image: url('/images/bg_2.jpg');"
+         data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-end">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs mb-2"><span class="mr-2"><a th:href="@{/}">Home <i
+                        class="ion-ios-arrow-forward"></i></a></span> <span>Add Pet <i
+                        class="ion-ios-arrow-forward"></i></span></p>
+                <h1 class="mb-0 bread">Add Pet</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-md-7">
+                <div class="contact-wrap w-100 p-md-5 p-4">
+                    <h3 class="mb-4">Add Pet</h3>
+                    <form id="createArticle" name="create" class="registerForm" enctype="multipart/form-data"
+                          th:method="POST"
+                          th:action="@{/pet/add}"
+                          th:object="${addPetBindingModel}">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="label" for="name">Name*</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Pet's Name"
+                                           th:name="name"
+                                           th:field="*{name}"
+                                           th:errorclass="alert-danger">
+                                    <small th:if="${#fields.hasErrors()}" th:errors="*{name}" class="text-danger">Name error message</small>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="form-field">
+                                        <div class="select-wrap">
+                                            <label class="label">Animal type*</label>
+                                                <select class="form-control"
+                                                        th:name="type"
+                                                        th:field="*{type}"
+                                                        th:errorclass="alert-danger">
+                                                    <option value="">Select Animal type</option>
+                                                    <option value="CAT">Cat</option>
+                                                    <option value="DOG">Dog</option>
+                                                    <option value="BIRD">Bird</option>
+                                                    <option value="OTHER">Other</option>
+                                                </select>
+
+                                            <small th:if="${#fields.hasErrors()}" th:errors="*{type}" class="text-danger"> error message</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="label" for="breed">Breed</label>
+                                    <input type="text" class="form-control" id="breed" placeholder="Breed"
+                                              th:name="breed"
+                                              th:field="*{breed}"
+                                              th:errorclass="alert-danger">
+                                    <small th:if="${#fields.hasErrors()}" th:errors="*{breed}" class="text-danger">Breed error message</small>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="label" for="owner">Owner*</label>
+                                    <input type="text" class="form-control" id="owner" placeholder="Pet's Owner"
+                                              th:name="owner"
+                                              th:field="*{owner}"
+                                              th:errorclass="alert-danger">
+                                    <small th:if="${#fields.hasErrors()}" th:errors="*{owner}" class="text-danger">Owner error message</small>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="inputPicture">Input picture</label>
+                                    <br/>
+                                    <input type="file" class="file-input" accept="image/*" id="inputPicture" placeholder="Input Image"
+                                           th:name="picture"
+                                           th:field="*{picture}">
+                                    <br/>
+                                    <small th:if="${#fields.hasErrors()}" th:errors="*{picture}" class="text-danger">Picture error message</small>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="submit" value="create" class="btn btn-primary">
+                                    <div class="submitting"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-5 d-flex align-items-stretch">
+                <div class="img-fluid" id="divImageMediaPreview"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{fragments/commons::footer}"></footer>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.easing.1.3.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/jquery.animateNumber.min.js"></script>
+<script src="/js/bootstrap-datepicker.js"></script>
+<script src="/js/jquery.timepicker.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/scrollax.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/img-preview.js"></script>
+</body>
+</html>

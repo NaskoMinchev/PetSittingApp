@@ -4,6 +4,8 @@ import bg.project.petsittingapp.model.dto.ArticleDTO;
 import bg.project.petsittingapp.model.dto.BlogDTO;
 import bg.project.petsittingapp.model.dto.CreateArticleDTO;
 
+import java.awt.print.Pageable;
+
 public interface ArticleService {
 
     void create(CreateArticleDTO createArticleDTO);

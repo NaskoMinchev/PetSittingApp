@@ -25,7 +25,7 @@
         <div class="row">
           <div th:object="${articleDTO}" class="col-lg-8 ftco-animate">
           	<p>
-              <img th:src="@{'/images/articlePictures/' + ${articleDTO.getPictureURL()}}" alt="image" class="img-fluid">
+              <img th:src="@{'/images/' + ${articleDTO.getImage().getImageUrl()}}" alt="image" class="img-fluid">
             </p>
             <h2 th:text="${articleDTO.title}" class="mb-3">Title</h2>
             <p th:text="${articleDTO.header}">Header</p>
@@ -196,7 +196,7 @@
               <h3>Recent Blog</h3>
               <div th:each="article: ${blogDTO.getArticles()}" class="block-21 mb-4 d-flex">
                 <a th:href="@{/blog/article/{id}(id=${article.getId()})}" class="blog-img mr-4"
-                   th:style="'background-image:url(' + '/images/articlePictures/' + ${article.getPictureURL()} + ');'">
+                   th:style="'background-image:url(' + '/images/' + ${article.getImage().getImageUrl()} + ');'">
                 </a>
                 <div class="text">
                   <h3 class="heading"><a th:href="@{/blog/article/{id}(id=${article.getId()})}" th:text="${article.title}">Title</a></h3>

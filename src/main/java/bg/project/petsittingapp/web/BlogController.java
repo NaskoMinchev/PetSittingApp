@@ -43,7 +43,10 @@ public class BlogController {
         ArticleDTO articleDTO = articleService.getSingleArticle(id);
 
         BlogDTO blogDTO = articleService.getAllArticles();
-        blogDTO.setArticles(blogDTO.getArticles().subList(0, 3));
+
+        if (blogDTO.getArticles().size() >= 3) {
+            blogDTO.setArticles(blogDTO.getArticles().subList(0, 3));
+        }
 
         ModelAndView modelAndView = new ModelAndView("blog-single");
         modelAndView.addObject(articleDTO);
