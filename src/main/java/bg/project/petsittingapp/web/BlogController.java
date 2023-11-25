@@ -81,7 +81,7 @@ public class BlogController {
         return new ModelAndView("redirect:/blog");
     }
 
-    @DeleteMapping("/blog/article/{id}")
+    @DeleteMapping("/blog/article/delete/{id}")
     public ModelAndView deleteArticle(@PathVariable("id") Long id) {
 
         articleService.deleteArticle(id);

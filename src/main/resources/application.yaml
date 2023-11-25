@@ -20,6 +20,10 @@ spring:
       resources:
         static-locations[0]: "file:src/main/resources/static/"
         static-locations[1]: "classpath:/static/"
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
 
 mail:
     petSitting: "lapichkata@project.bg"

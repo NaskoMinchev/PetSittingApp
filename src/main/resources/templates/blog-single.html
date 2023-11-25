@@ -33,7 +33,7 @@
             <p th:text="${articleDTO.footer}">Footer</p>
 
             <div sec:authorize="hasRole('ADMIN')" class="container row d-flex">
-              <form th:method="DELETE" th:action="@{/blog/article/{id}(id=${articleDTO.getId()})}">
+              <form th:method="DELETE" th:action="@{/blog/article/delete/{id}(id=${articleDTO.getId()})}">
                 <button class="btn btn-danger" type="submit" th:text="Delete"></button>
               </form>
               <a class="btn btn-success ml-3" th:href="@{/blog/article/edit/{id}(id=${articleDTO.getId()})}">Edit</a>

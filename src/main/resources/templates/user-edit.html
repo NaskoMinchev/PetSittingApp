@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+<header th:replace="~{fragments/commons::header}"></header>
+
+<section class="hero-wrap hero-wrap-2" style="background-image: url('/images/bg_2.jpg');"
+         data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-end">
+      <div class="col-md-9 ftco-animate pb-5">
+        <p class="breadcrumbs mb-2"><span class="mr-2"><a th:href="@{/}">Home <i
+                class="ion-ios-arrow-forward"></i></a></span> <span>Edit User <i
+                class="ion-ios-arrow-forward"></i></span></p>
+        <h1 class="mb-0 bread">Edit User</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section bg-light">
+  <div class="container">
+    <div class="row no-gutters">
+      <div class="col-md-6">
+        <div class="contact-wrap w-100 p-md-5 p-4">
+          <h3 class="mb-4">Edit User</h3>
+          <form id="editUser" name="edit" class="registerForm"
+                th:method="POST"
+                th:action="@{/user/edit/save/{id}(id=${userDTO.getId()})}"
+                th:object="${userDTO}">
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="label" for="id">Id</label>
+                  <input th:text="|: *{id}|" type="hidden" class="form-control" id="id"
+                         th:name="id"
+                         th:field="*{id}">
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="label" for="username">Username</label>
+                  <input th:text="|: *{username}|" type="hidden" class="form-control" id="username"
+                         th:name="username"
+                         th:field="*{username}">
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="label" for="email">Email</label>
+                  <input th:text="|: *{email}|" type="hidden" class="form-control" id="email"
+                            th:name="email"
+                            th:field="*{email}">
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="label" for="role">Roles: </label>
+                  <div type="text" class="form-control" id="role">
+                    <th:block th:each="role: ${userRoles}">
+                      <input th:if="${userDTO.id}==1" type="hidden" th:field="*{roles}"
+                             th:text="${role.role}" th:value="${role.id}" class="m-2"/>
+
+                      <input th:unless="${userDTO.id}==1" type="checkbox" th:field="*{roles}"
+                             th:text="${role.role}" th:value="${role.id}" class="m-2"/>
+                    </th:block>
+
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <a th:if="${userDTO.id}==1" th:href="@{/user/all}" class="btn btn-primary">Back</a>
+
+                  <input th:unless="${userDTO.id}==1" type="submit" value="Save User" class="btn btn-primary">
+                  <div class="submitting"></div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-5 d-flex align-items-stretch">
+        <div class="info-wrap w-100 p-5 img" style="background-image: url(/images/admin.png);">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer th:replace="~{fragments/commons::footer}"></footer>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.easing.1.3.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/jquery.animateNumber.min.js"></script>
+<script src="/js/bootstrap-datepicker.js"></script>
+<script src="/js/jquery.timepicker.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/scrollax.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/img-preview.js"></script>
+
+
+</body>
+</html>

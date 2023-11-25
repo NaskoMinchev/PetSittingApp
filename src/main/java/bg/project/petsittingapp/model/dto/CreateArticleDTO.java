@@ -20,7 +20,6 @@ public class CreateArticleDTO {
     @NotNull(message = "Enter footer!")
     @NotBlank(message = "Footer can not be blank!")
     private String footer;
-    @NotNull(message = "Choose picture!")
     @ImageAnnotation(contentTypes = {"image/jpeg", "image/png"})
     private MultipartFile picture;
     private User author;

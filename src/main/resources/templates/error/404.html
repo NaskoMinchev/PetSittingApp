@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/commons::head}">
+    <title>Error</title>
+</head>
+<body>
+<header th:replace="~{fragments/commons::header}"></header>
+
+<section class="ftco-section ftco-no-pt ftco-no-pb mt-xl-5 pt-xl-5">
+    <div class="container mt-xl-5 pt-lg-5">
+        <div class="row d-flex no-gutters mt-xl-5 pt-lg-5">
+            <div class="col-md-5 d-flex">
+                <div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-center mb-4 mb-sm-0">
+                    <img src="/images/error.png">
+                </div>
+            </div>
+            <div class="col-md-7 pl-md-5 py-md-5">
+                <div class="heading-section pt-md-5">
+                    <h2 style="text-align: center">OOPS!!! The page that you are looking for is not available!</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

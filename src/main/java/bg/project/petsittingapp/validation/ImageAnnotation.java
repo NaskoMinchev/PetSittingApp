@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = ImageValidator.class)
 public @interface ImageAnnotation {
-
+    long size() default 5 *1024 * 1024;
     String[] contentTypes();
 
     String message() default "Incorrect file!";

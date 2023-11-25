@@ -10,11 +10,14 @@ import java.util.List;
 public class ImageValidator implements ConstraintValidator<ImageAnnotation, MultipartFile> {
 
     private List<String> contentTypes;
+    private long size;
 
     @Override
     public void initialize(ImageAnnotation constraintAnnotation) {
-        ConstraintValidator.super.initialize(constraintAnnotation);
         this.contentTypes = Arrays.stream(constraintAnnotation.contentTypes()).toList();
+        this.size = constraintAnnotation.size();
+
+        ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
     @Override
@@ -34,6 +37,10 @@ public class ImageValidator implements ConstraintValidator<ImageAnnotation, Mult
 
         if (file.isEmpty()) {
             return "File must be provided";
+        }
+
+        if (file.getSize() > size) {
+            return "Exceeded file size! Max file size: " + size;
         }
 
         if (!contentTypes.contains(file.getContentType())) {

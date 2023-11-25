@@ -8,20 +8,17 @@ import jakarta.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 public class AddPetBindingModel {
-    @NotNull(message = "Pet's name cannot be null!")
-    @NotBlank(message = "Pet's name cannot be empty!")
-    @Size(min = 1, message = "Pet name's length must be at least 1 character!")
+    @NotNull(message = "Pet name cannot be null!")
+    @NotBlank(message = "Pet name cannot be empty!")
+    @Size(min = 1, message = "Pet name length must be at least 1 character!")
     private String name;
     private String breed;
-    @NotNull(message = "Pet's owner cannot be null!")
-    @NotBlank(message = "Pet's owner cannot be empty!")
-    @Size(min = 1, message = "Pet owner name's length must be at least 1 character!")
+    @NotNull(message = "Owner name cannot be null!")
+    @NotBlank(message = "Owner name cannot be empty!")
+    @Size(min = 1, message = "Owner name length must be at least 1 character!")
     private String owner;
-    @NotNull
-    @NotBlank(message = "Select animal type!")
+    @NotNull(message = "Select animal type!")
     private AnimalType type;
-    @NotNull(message = "Choose picture!")
-    @NotBlank
     @ImageAnnotation(contentTypes = {"image/jpeg", "image/png"})
     private MultipartFile picture;
     public AddPetBindingModel() {

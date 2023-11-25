@@ -34,8 +34,8 @@
                         <span class="fa fa-expand"></span>
                     </a>
                     <div class="desc w-100 px-4">
-                        <div class="text w-100 mb-3">
-                            <span th:text="|${petInfo.getType()} - ${petInfo.getBreed()}|">Cat</span>
+                        <div style="background: #595959" class="text w-100 mb-3">
+                            <span th:text="|${petInfo.getOwner()}: ${petInfo.getBreed()} ${petInfo.getType().toString().toLowerCase()}|">Cat</span>
                             <h2 th:text="${petInfo.getName()}">Name</h2>
                         </div>
                     </div>

@@ -23,7 +23,10 @@ public class SecurityConfig {
                             .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                             .requestMatchers("/fonts/**").permitAll()
                             .requestMatchers("/", "/login", "/register", "/about", "/services", "/contact", "/contact/send","/gallery", "/login-error").permitAll()
-                            .requestMatchers("/blog-create", "/blog-edit").hasRole(RoleEnum.ADMIN.name())
+                            .requestMatchers("/error").permitAll()
+                            .requestMatchers("/blog/create", "/blog/article/edit/{id}",
+                                    "/blog/article/delete/{id}", "/user/all", "/user/update/{id}",
+                                    "/user/delete/{id}").hasRole(RoleEnum.ADMIN.name())
                             .anyRequest().authenticated()
 
         ).formLogin(

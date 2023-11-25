@@ -3,12 +3,14 @@ package bg.project.petsittingapp.web;
 import bg.project.petsittingapp.model.dto.AddPetBindingModel;
 import bg.project.petsittingapp.model.dto.GalleryDTO;
 import bg.project.petsittingapp.service.PetService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class GalleryController {
@@ -36,9 +38,13 @@ public class GalleryController {
     }
 
     @PostMapping("/pet/add")
-    public ModelAndView addPet(@ModelAttribute("addPetBindingModel") AddPetBindingModel addPetBindingModel, BindingResult bindingResult) {
+    public ModelAndView addPet(@ModelAttribute("addPetBindingModel")
+                                   @Valid AddPetBindingModel addPetBindingModel,
+                                    BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("addPetBindingModel", addPetBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addPetBindingModel", bindingResult);
             return new ModelAndView("pet-add");
         }
         petService.addPet(addPetBindingModel);
