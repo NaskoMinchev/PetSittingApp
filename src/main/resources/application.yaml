@@ -25,6 +25,7 @@ spring:
       max-file-size: 5MB
       max-request-size: 5MB
 
+#Using MailHog, not a real SMTP server!
 mail:
     petSitting: "lapichkata@project.bg"
     host: localhost

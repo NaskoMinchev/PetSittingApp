@@ -67,6 +67,14 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label class="label" for="addInfo">Additional Info</label>
+                                    <textarea type="text" class="form-control" id="addInfo" cols="30" rows="3" placeholder="Additional Info"
+                                              th:name="additionalInfo"
+                                              th:field="*{additionalInfo}"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     <label class="label" for="footer">Footer</label>
                                     <textarea type="text" class="form-control" id="footer" cols="30" rows="2" placeholder="Footer"
                                               th:name="footer"

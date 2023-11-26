@@ -38,4 +38,13 @@ public class HomeController {
 
         return modelAndView;
     }
+    @GetMapping("/about")
+    public ModelAndView about() {
+        return new ModelAndView("about");
+    }
+
+    @GetMapping("/services")
+    public ModelAndView cervices() {
+        return new ModelAndView("services");
+    }
 }

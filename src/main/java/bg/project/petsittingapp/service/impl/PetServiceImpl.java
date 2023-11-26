@@ -3,6 +3,7 @@ package bg.project.petsittingapp.service.impl;
 import bg.project.petsittingapp.model.dto.AddPetBindingModel;
 import bg.project.petsittingapp.model.dto.GalleryDTO;
 import bg.project.petsittingapp.model.dto.PetDTO;
+import bg.project.petsittingapp.model.entity.Article;
 import bg.project.petsittingapp.model.entity.Image;
 import bg.project.petsittingapp.model.entity.Pet;
 import bg.project.petsittingapp.repository.PetRepository;
@@ -54,5 +55,10 @@ public class PetServiceImpl implements PetService {
         Collections.reverse(galleryDTO.getPets());
 
         return galleryDTO;
+    }
+
+    @Override
+    public List<Long> getAllPetImageIds() {
+        return petRepository.findAll().stream().map(Pet::getImage).map(Image::getId).toList();
     }
 }

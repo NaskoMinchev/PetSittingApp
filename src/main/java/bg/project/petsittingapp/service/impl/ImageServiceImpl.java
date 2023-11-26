@@ -10,6 +10,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -50,7 +53,26 @@ public class ImageServiceImpl implements ImageService {
         String pathPattern = "%s%s_%s.%s";
         return String.format(pathPattern, folderName,transformTitle(name), UUID.randomUUID(), pictureFileExt);
     }
+
     public String transformTitle(String title) {
         return title.toLowerCase().replaceAll("\\s+", "_");
+    }
+
+    @Override
+    public void deleteUnusedArticleImages(List<Long> articleImageIds, List<Long> petImageIds) {
+
+        List<Image> images = imageRepository.findAll();
+
+        for (Image image : images) {
+            if (!articleImageIds.contains(image.getId()) && !petImageIds.contains(image.getId())) {
+                imageRepository.deleteById(image.getId());
+
+                try {
+                    Files.delete(Path.of(IMAGES_SAVE_PATH + image.getImageUrl()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 }

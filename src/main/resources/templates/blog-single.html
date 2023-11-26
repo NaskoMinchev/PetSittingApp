@@ -5,258 +5,278 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="~{fragments/commons::head}"></head>
-  <body>
-  <header th:replace="~{fragments/commons::header}"></header>
+<body>
+<header th:replace="~{fragments/commons::header}"></header>
 
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
+<section class="hero-wrap hero-wrap-2" style="background-image: url('/images/bg_2.jpg');"
+         data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
         <div class="row no-gutters slider-text align-items-end">
-          <div class="col-md-9 ftco-animate pb-5">
-          	<p class="breadcrumbs mb-2"><span class="mr-2"><a th:href="@{/}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span class="mr-2"><a href="blog.html">Blog <i class="ion-ios-arrow-forward"></i></a></span> <span>Article <i class="ion-ios-arrow-forward"></i></span></p>
-            <h1 class="mb-0 bread">Article</h1>
-          </div>
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs mb-2"><span class="mr-2"><a th:href="@{/}">Home <i
+                        class="ion-ios-arrow-forward"></i></a></span> <span class="mr-2"><a th:href="@{/blog}">Blog <i
+                        class="ion-ios-arrow-forward"></i></a></span> <span>Article <i
+                        class="ion-ios-arrow-forward"></i></span></p>
+                <h1 th:text="${articleDTO.title}" class="mb-0 bread">Article</h1>
+            </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="ftco-section ftco-degree-bg">
-      <div class="container">
+<section class="ftco-section ftco-degree-bg">
+    <div class="container">
         <div class="row">
-          <div th:object="${articleDTO}" class="col-lg-8 ftco-animate">
-          	<p>
-              <img th:src="@{'/images/' + ${articleDTO.getImage().getImageUrl()}}" alt="image" class="img-fluid">
-            </p>
-            <h2 th:text="${articleDTO.title}" class="mb-3">Title</h2>
-            <p th:text="${articleDTO.header}">Header</p>
-            <p th:text="${articleDTO.body}">Body</p>
-            <p th:text="${articleDTO.footer}">Footer</p>
+            <div th:object="${articleDTO}" class="col-lg-8 ftco-animate">
+                <p>
+                    <img th:src="@{'/images/' + ${articleDTO.getImage().getImageUrl()}}" alt="image" class="img-fluid">
+                </p>
+                <h2 th:text="${articleDTO.title}" class="mb-3">Title</h2>
+                <p style="text-indent: 50px" th:text="${articleDTO.header}">Header</p>
+                <p style="text-indent: 50px" th:text="${articleDTO.body}">Body</p>
+                <p style="text-indent: 50px" th:text="${articleDTO.additionalInfo}">Body</p>
+                <p style="text-indent: 50px" th:text="${articleDTO.footer}">Footer</p>
 
-            <div sec:authorize="hasRole('ADMIN')" class="container row d-flex">
-              <form th:method="DELETE" th:action="@{/blog/article/delete/{id}(id=${articleDTO.getId()})}">
-                <button class="btn btn-danger" type="submit" th:text="Delete"></button>
-              </form>
-              <a class="btn btn-success ml-3" th:href="@{/blog/article/edit/{id}(id=${articleDTO.getId()})}">Edit</a>
-            </div>
-            <div class="tag-widget post-tag-container mb-5 mt-5">
-              <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">Life</a>
-                <a href="#" class="tag-cloud-link">Sport</a>
-                <a href="#" class="tag-cloud-link">Tech</a>
-                <a href="#" class="tag-cloud-link">Travel</a>
-              </div>
-            </div>
-            
-            <div class="about-author d-flex p-4 bg-light">
-              <div class="bio mr-5">
-                <img src="/images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
-              </div>
-              <div class="desc">
-                <h3>George Washington</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-              </div>
-            </div>
+                <div sec:authorize="hasRole('ADMIN')" class="container row d-flex">
+                    <form th:method="DELETE" th:action="@{/blog/article/delete/{id}(id=${articleDTO.getId()})}">
+                        <button class="btn btn-danger" type="submit" th:text="Delete"></button>
+                    </form>
+                    <a class="btn btn-success ml-3"
+                       th:href="@{/blog/article/edit/{id}(id=${articleDTO.getId()})}">Edit</a>
+                </div>
+                <div class="tag-widget post-tag-container mb-5 mt-5">
+                    <div class="tagcloud">
+                        <a href="#" class="tag-cloud-link">Cat</a>
+                        <a href="#" class="tag-cloud-link">Dog</a>
+                        <a href="#" class="tag-cloud-link">Pet</a>
+                        <a href="#" class="tag-cloud-link">Health</a>
+                    </div>
+                </div>
 
-
-            <div class="pt-5 mt-5">
-              <h3 class="mb-5">6 Comments</h3>
-              <ul class="comment-list">
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="/images/person_1.jpg" alt="Image placeholder">
-                  </div>
-                  <div class="comment-body">
-                    <h3>John Doe</h3>
-                    <div class="meta">April 7, 2020 at 10:05pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply">Reply</a></p>
-                  </div>
-                </li>
-
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="/images/person_1.jpg" alt="Image placeholder">
-                  </div>
-                  <div class="comment-body">
-                    <h3>John Doe</h3>
-                    <div class="meta">April 7, 2020 at 10:05pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply">Reply</a></p>
-                  </div>
-
-                  <ul class="children">
-                    <li class="comment">
-                      <div class="vcard bio">
-                        <img src="/images/person_1.jpg" alt="Image placeholder">
-                      </div>
-                      <div class="comment-body">
-                        <h3>John Doe</h3>
-                        <div class="meta">April 7, 2020 at 10:05pm</div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                        <p><a href="#" class="reply">Reply</a></p>
-                      </div>
+                <div class="about-author d-flex p-4 bg-light">
+                    <div class="bio mr-5">
+                        <img src="/images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
+                    </div>
+                    <div class="desc">
+                        <h3 th:text="${articleDTO.getAuthorName()}">name</h3>
+                        <p>Pets are a great blessing in anyone’s life. They are the only ones who love us unconditionally.
+                            Pets always offer us everything they have without asking for anything in return.
+                            The main aim of any pet’s life is to make their owner happy!</p>
+                    </div>
+                </div>
 
 
-                      <ul class="children">
+                <div class="pt-2 mt-2">
+                    <h3 class="mb-5">6 Comments</h3>
+                    <ul class="comment-list">
                         <li class="comment">
-                          <div class="vcard bio">
-                            <img src="/images/person_1.jpg" alt="Image placeholder">
-                          </div>
-                          <div class="comment-body">
-                            <h3>John Doe</h3>
-                            <div class="meta">April 7, 2020 at 10:05pm</div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                            <p><a href="#" class="reply">Reply</a></p>
-                          </div>
+                            <div class="vcard bio">
+                                <img src="/images/person_1.jpg" alt="Image placeholder">
+                            </div>
+                            <div class="comment-body">
+                                <h3>John Doe</h3>
+                                <div class="meta">April 7, 2020 at 10:05pm</div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
+                                    necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente
+                                    iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                <p><a href="#" class="reply">Reply</a></p>
+                            </div>
+                        </li>
+
+                        <li class="comment">
+                            <div class="vcard bio">
+                                <img src="/images/person_1.jpg" alt="Image placeholder">
+                            </div>
+                            <div class="comment-body">
+                                <h3>John Doe</h3>
+                                <div class="meta">April 7, 2020 at 10:05pm</div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
+                                    necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente
+                                    iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                <p><a href="#" class="reply">Reply</a></p>
+                            </div>
 
                             <ul class="children">
-                              <li class="comment">
-                                <div class="vcard bio">
-                                  <img src="/images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                  <h3>John Doe</h3>
-                                  <div class="meta">April 7, 2020 at 10:05pm</div>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                  <p><a href="#" class="reply">Reply</a></p>
-                                </div>
-                              </li>
+                                <li class="comment">
+                                    <div class="vcard bio">
+                                        <img src="/images/person_1.jpg" alt="Image placeholder">
+                                    </div>
+                                    <div class="comment-body">
+                                        <h3>John Doe</h3>
+                                        <div class="meta">April 7, 2020 at 10:05pm</div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem
+                                            laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe
+                                            enim sapiente iste iure! Quam voluptas earum impedit necessitatibus,
+                                            nihil?</p>
+                                        <p><a href="#" class="reply">Reply</a></p>
+                                    </div>
+
+
+                                    <ul class="children">
+                                        <li class="comment">
+                                            <div class="vcard bio">
+                                                <img src="/images/person_1.jpg" alt="Image placeholder">
+                                            </div>
+                                            <div class="comment-body">
+                                                <h3>John Doe</h3>
+                                                <div class="meta">April 7, 2020 at 10:05pm</div>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur
+                                                    quidem laborum necessitatibus, ipsam impedit vitae autem, eum
+                                                    officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum
+                                                    impedit necessitatibus, nihil?</p>
+                                                <p><a href="#" class="reply">Reply</a></p>
+                                            </div>
+
+                                            <ul class="children">
+                                                <li class="comment">
+                                                    <div class="vcard bio">
+                                                        <img src="/images/person_1.jpg" alt="Image placeholder">
+                                                    </div>
+                                                    <div class="comment-body">
+                                                        <h3>John Doe</h3>
+                                                        <div class="meta">April 7, 2020 at 10:05pm</div>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                            Pariatur quidem laborum necessitatibus, ipsam impedit vitae
+                                                            autem, eum officia, fugiat saepe enim sapiente iste iure!
+                                                            Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                                        <p><a href="#" class="reply">Reply</a></p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="/images/person_1.jpg" alt="Image placeholder">
-                  </div>
-                  <div class="comment-body">
-                    <h3>John Doe</h3>
-                    <div class="meta">April 7, 2020 at 10:05pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply">Reply</a></p>
-                  </div>
-                </li>
-              </ul>
-              <!-- END comment-list -->
-              
-              <div class="comment-form-wrap pt-5">
-                <h3 class="mb-5">Leave a comment</h3>
-                <form action="#" class="p-5 bg-light">
-                  <div class="form-group">
-                    <label for="name">Name *</label>
-                    <input type="text" class="form-control" id="name">
-                  </div>
-                  <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" class="form-control" id="email">
-                  </div>
-                  <div class="form-group">
-                    <label for="website">Website</label>
-                    <input type="url" class="form-control" id="website">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
-                  </div>
-
-                </form>
-              </div>
-            </div>
-
-          </div> <!-- .col-md-8 -->
-          <div class="col-lg-4 sidebar pl-lg-5 ftco-animate">
-            <div class="sidebar-box">
-              <form action="#" class="search-form">
-                <div class="form-group">
-                  <span class="fa fa-search"></span>
-                  <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
+                        <li class="comment">
+                            <div class="vcard bio">
+                                <img src="/images/person_1.jpg" alt="Image placeholder">
+                            </div>
+                            <div class="comment-body">
+                                <h3>John Doe</h3>
+                                <div class="meta">April 7, 2020 at 10:05pm</div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
+                                    necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente
+                                    iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                <p><a href="#" class="reply">Reply</a></p>
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- END comment-list -->
+                    <div class="comment-form-wrap pt-5">
+                        <h3 class="mb-4">Leave a comment</h3>
+                        <ul class="comment-list">
+                            <li class="comment bg-light pt-2">
+                                <div class="vcard bio pl-2">
+                                    <img src="/images/anonymous-profile-pic.jpg" alt="Image placeholder">
+                                </div>
+                                <div class="comment-body">
+                                    <h3 sec:authentication="name">John Doe</h3>
+                                    <form action="#" class="pr-5 bg-light">
+                                        <div class="form-group">
+                                            <label for="message">Message</label>
+                                            <textarea name="" id="message" cols="30" rows="2" class="form-control" style="resize: vertical"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-              </form>
-            </div>
-            <div class="sidebar-box ftco-animate">
-              <div class="categories">
-                <h3>Services</h3>
-                <li><a th:href="@{/services}">Pet Sitting <span class="fa fa-chevron-right"></span></a></li>
-                <li><a th:href="@{/services}">Dog Walking <span class="fa fa-chevron-right"></span></a></li>
-                <li><a th:href="@{/services}">Pet Training <span class="fa fa-chevron-right"></span></a></li>
-                <li><a th:href="@{/services}">Spa & Grooming <span class="fa fa-chevron-right"></span></a></li>
-                <li><a th:href="@{/services}">Pet Daycare <span class="fa fa-chevron-right"></span></a></li>
-                <li><a th:href="@{/services}">Pet Medicine <span class="fa fa-chevron-right"></span></a></li>
-              </div>
-            </div>
 
-            <div class="sidebar-box ftco-animate">
-              <h3>Recent Blog</h3>
-              <div th:each="article: ${blogDTO.getArticles()}" class="block-21 mb-4 d-flex">
-                <a th:href="@{/blog/article/{id}(id=${article.getId()})}" class="blog-img mr-4"
-                   th:style="'background-image:url(' + '/images/' + ${article.getImage().getImageUrl()} + ');'">
-                </a>
-                <div class="text">
-                  <h3 class="heading"><a th:href="@{/blog/article/{id}(id=${article.getId()})}" th:text="${article.title}">Title</a></h3>
-                  <div class="meta">
-                    <div><a th:text="${article.getCreated()}"><span class="icon-calendar"></span> Created</a></div>
-                    <div><a th:text="${article.getAuthorName()}"><span class="icon-person"></span> Author</a></div>
-                    <div><a th:text="${article.getComments().size()}"><span class="icon-chat"></span> Comments</a></div>
-                  </div>
+            </div> <!-- .col-md-8 -->
+            <div class="col-lg-4 sidebar pl-lg-5 ftco-animate">
+                <div class="sidebar-box">
+                    <form action="#" class="search-form">
+                        <div class="form-group">
+                            <span class="fa fa-search"></span>
+                            <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
+                        </div>
+                    </form>
                 </div>
-              </div>
-            </div>
+                <div class="sidebar-box ftco-animate">
+                    <div class="categories">
+                        <h3>Services</h3>
+                        <li><a th:href="@{/services}">Pet Sitting <span class="fa fa-chevron-right"></span></a></li>
+                        <li><a th:href="@{/services}">Dog Walking <span class="fa fa-chevron-right"></span></a></li>
+                        <li><a th:href="@{/services}">Pet Training <span class="fa fa-chevron-right"></span></a></li>
+                        <li><a th:href="@{/services}">Spa & Grooming <span class="fa fa-chevron-right"></span></a></li>
+                        <li><a th:href="@{/services}">Pet Daycare <span class="fa fa-chevron-right"></span></a></li>
+                        <li><a th:href="@{/services}">Pet Medicine <span class="fa fa-chevron-right"></span></a></li>
+                    </div>
+                </div>
 
-            <div class="sidebar-box ftco-animate">
-              <h3>Tag Cloud</h3>
-              <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">cat</a>
-                <a href="#" class="tag-cloud-link">dog</a>
-                <a href="#" class="tag-cloud-link">pet</a>
-                <a href="#" class="tag-cloud-link">bird</a>
-                <a href="#" class="tag-cloud-link">husky</a>
-                <a href="#" class="tag-cloud-link">bulldog</a>
-                <a href="#" class="tag-cloud-link">food</a>
-              </div>
-            </div>
+                <div class="sidebar-box ftco-animate">
+                    <h3>Recent Blog</h3>
+                    <div th:each="article: ${blogDTO.getArticles()}" class="block-21 mb-4 d-flex">
+                        <a th:href="@{/blog/article/{id}(id=${article.getId()})}" class="blog-img mr-4"
+                           th:style="'background-image:url(' + '/images/' + ${article.getImage().getImageUrl()} + ');'">
+                        </a>
+                        <div class="text">
+                            <h3 class="heading"><a th:href="@{/blog/article/{id}(id=${article.getId()})}"
+                                                   th:text="${article.title}">Title</a></h3>
+                            <div class="meta">
+                                <div><a th:text="${article.getCreated()}"><span class="icon-calendar"></span>
+                                    Created</a></div>
+                                <div><a th:text="${article.getAuthorName()}"><span class="icon-person"></span>
+                                    Author</a></div>
+                                <div><a th:text="${article.getComments().size()}"><span class="icon-chat"></span>
+                                    Comments</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="sidebar-box ftco-animate">
-              <h3>Paragraph</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+                <div class="sidebar-box ftco-animate">
+                    <h3>Tag Cloud</h3>
+                    <div class="tagcloud">
+                        <a href="#" class="tag-cloud-link">cat</a>
+                        <a href="#" class="tag-cloud-link">dog</a>
+                        <a href="#" class="tag-cloud-link">pet</a>
+                        <a href="#" class="tag-cloud-link">bird</a>
+                        <a href="#" class="tag-cloud-link">husky</a>
+                        <a href="#" class="tag-cloud-link">bulldog</a>
+                        <a href="#" class="tag-cloud-link">food</a>
+                    </div>
+                </div>
+
+                <div class="sidebar-box ftco-animate">
+                    <h3>Paragraph</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus
+                        voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur
+                        similique, inventore eos fugit cupiditate numquam!</p>
+                </div>
             </div>
-          </div>
 
         </div>
-      </div>
-    </section> <!-- .section -->
+    </div>
+</section> <!-- .section -->
 
-    <footer th:replace="~{fragments/commons::footer}"></footer>
+<footer th:replace="~{fragments/commons::footer}"></footer>
 
-    
-  
 
-  <!-- loader -->
+<!-- loader -->
 <!--  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>-->
 
 
-  <script src="/js/jquery.min.js"></script>
-  <script src="/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="/js/popper.min.js"></script>
-  <script src="/js/bootstrap.min.js"></script>
-  <script src="/js/jquery.easing.1.3.js"></script>
-  <script src="/js/jquery.waypoints.min.js"></script>
-  <script src="/js/jquery.stellar.min.js"></script>
-  <script src="/js/jquery.animateNumber.min.js"></script>
-  <script src="/js/bootstrap-datepicker.js"></script>
-  <script src="/js/jquery.timepicker.min.js"></script>
-  <script src="/js/owl.carousel.min.js"></script>
-  <script src="/js/jquery.magnific-popup.min.js"></script>
-  <script src="/js/scrollax.min.js"></script>
-  <script src="/js/main.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.easing.1.3.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/jquery.animateNumber.min.js"></script>
+<script src="/js/bootstrap-datepicker.js"></script>
+<script src="/js/jquery.timepicker.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/scrollax.min.js"></script>
+<script src="/js/main.js"></script>
 
 
-    
-  </body>
+</body>
 </html>

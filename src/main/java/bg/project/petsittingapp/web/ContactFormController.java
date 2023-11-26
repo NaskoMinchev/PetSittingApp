@@ -40,7 +40,7 @@ public class ContactFormController {
 
         emailService.sendIncomingEmails(contactFormDTO);
 
-        ModelAndView modelAndView = new ModelAndView("contact");
+        ModelAndView modelAndView = new ModelAndView("/contact");
         modelAndView.addObject("message_send", true);
 
         return modelAndView;

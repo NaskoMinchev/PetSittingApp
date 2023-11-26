@@ -102,6 +102,10 @@ public class ArticleServiceImpl implements ArticleService {
             article.get().setBody(articleDTO.getBody());
         }
 
+        if (!articleDTO.getAdditionalInfo().isEmpty()) {
+            article.get().setAdditionalInfo(articleDTO.getAdditionalInfo());
+        }
+
         if (!articleDTO.getHeader().isEmpty()) {
             article.get().setHeader(articleDTO.getHeader());
         }
@@ -112,6 +116,11 @@ public class ArticleServiceImpl implements ArticleService {
         article.get().setCreated(LocalDate.now());
 
         articleRepository.save(article.get());
+    }
+
+    @Override
+    public List<Long> getAllArticleImageIds() {
+        return articleRepository.findAll().stream().map(Article::getImage).map(Image::getId).toList();
     }
 
     private ArticleDTO articleMap(Article article) {

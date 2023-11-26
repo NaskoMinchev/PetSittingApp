@@ -31,13 +31,12 @@ public class EmailServiceImpl implements EmailService {
             mimeMessageHelper.setFrom(contactFormDTO.getEmail());
             mimeMessageHelper.setReplyTo(contactFormDTO.getEmail());
             mimeMessageHelper.setSubject(contactFormDTO.getSubject());
-            mimeMessageHelper.setText(contactFormDTO.getMessage());
+            mimeMessageHelper.setText(contactFormDTO.getMessage(), true);
 
             javaMailSender.send(mimeMessage);
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
-
     }
 }

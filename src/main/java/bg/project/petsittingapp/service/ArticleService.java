@@ -5,6 +5,7 @@ import bg.project.petsittingapp.model.dto.BlogDTO;
 import bg.project.petsittingapp.model.dto.CreateArticleDTO;
 
 import java.awt.print.Pageable;
+import java.util.List;
 
 public interface ArticleService {
 
@@ -17,4 +18,6 @@ public interface ArticleService {
     void deleteArticle(Long id);
 
     void editArticle(ArticleDTO articleDTO);
+
+    List<Long> getAllArticleImageIds();
 }

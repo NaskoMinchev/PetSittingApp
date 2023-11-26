@@ -14,6 +14,9 @@ public class Article extends BaseEntity {
     private String header;
     @Column(nullable = false, columnDefinition = "longtext")
     private String body;
+
+    @Column(columnDefinition = "longtext")
+    private String additionalInfo;
     @Column(nullable = false, columnDefinition = "text")
     private String footer;
     @OneToOne(optional = false)
@@ -50,6 +53,14 @@ public class Article extends BaseEntity {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 
     public String getFooter() {

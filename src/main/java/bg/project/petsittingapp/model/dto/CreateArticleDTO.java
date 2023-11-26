@@ -17,6 +17,7 @@ public class CreateArticleDTO {
     @NotNull(message = "Enter body!")
     @NotBlank(message = "Body can not be blank!")
     private String body;
+    private String additionalInfo;
     @NotNull(message = "Enter footer!")
     @NotBlank(message = "Footer can not be blank!")
     private String footer;
@@ -52,6 +53,14 @@ public class CreateArticleDTO {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 
     public String getFooter() {

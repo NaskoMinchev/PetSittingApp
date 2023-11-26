@@ -10,6 +10,7 @@ public class ArticleDTO {
     private String title;
     private String header;
     private String body;
+    private String additionalInfo;
     private String footer;
     private Image image;
     private MultipartFile picture;
@@ -50,6 +51,14 @@ public class ArticleDTO {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 
     public String getFooter() {

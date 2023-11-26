@@ -37,7 +37,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="label" for="title">Title</label>
+                                    <label class="label" for="title">Title*</label>
                                     <input type="text" class="form-control" id="title" placeholder="Title"
                                            th:name="title"
                                            th:field="*{title}"
@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="label" for="header">Header</label>
+                                    <label class="label" for="header">Header*</label>
                                     <textarea type="text" class="form-control" id="header" cols="30" rows="2" placeholder="Header"
                                               th:name="header"
                                               th:field="*{header}"
@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="label" for="body">Body</label>
+                                    <label class="label" for="body">Body*</label>
                                     <textarea type="text" class="form-control" id="body" cols="30" rows="3" placeholder="Body"
                                               th:name="body"
                                               th:field="*{body}"
@@ -67,7 +67,15 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="label" for="footer">Footer</label>
+                                    <label class="label" for="addInfo">Additional Info</label>
+                                    <textarea type="text" class="form-control" id="addInfo" cols="30" rows="3" placeholder="Additional Info"
+                                              th:name="additionalInfo"
+                                              th:field="*{additionalInfo}"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="label" for="footer">Footer*</label>
                                     <textarea type="text" class="form-control" id="footer" cols="30" rows="2" placeholder="Footer"
                                               th:name="footer"
                                               th:field="*{footer}"
