@@ -31,7 +31,7 @@
               	<div class="meta mb-2">
                   <div><a th:text="${article.getCreated()}"></a></div>
                   <div><a th:text="${article.getAuthorName()}"></a></div>
-                  <div><a th:text="${article.getComments().size()}" class="meta-chat"><span class="fa fa-comment"></span></a></div>
+                  <div><a th:text="| ${article.getComments().size()}|" class="meta-chat fa fa-comment"><span class="fa fa-comment"></span></a></div>
                 </div>
                 <h3 class="heading"><a th:text="${article.getTitle()}" th:href="@{/blog/article/{id}(id=${article.getId()})}"></a></h3>
               </div>

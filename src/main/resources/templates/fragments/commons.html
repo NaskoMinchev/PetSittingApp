@@ -5,6 +5,8 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <title>Pet Sitting</title>
+  <meta name="_csrf" th:content="${_csrf.token}"/>
+  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -68,8 +70,9 @@
             <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true">Admin</a>
             <div class="dropdown-menu" aria-labelledby="ftco-nav">
               <a class="dropdown-item" style="font-weight: bold" th:href="@{/blog/create}">CREATE ARTICLE</a>
-              <a class="dropdown-item" style="font-weight: bold" th:href="@{/user/all}">VIEW ALL USERS</a>
               <a class="dropdown-item" style="font-weight: bold" th:href="@{/pet/add}">ADD PET</a>
+              <hr class="m-1">
+              <a class="dropdown-item" style="font-weight: bold" th:href="@{/user/all}">VIEW ALL USERS</a>
             </div>
           </li>
           <li class="nav-item" sec:authorize="!isAuthenticated()"><a th:href="@{/login}" class="nav-link">Login</a></li>

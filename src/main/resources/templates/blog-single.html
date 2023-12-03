@@ -8,6 +8,8 @@
 <body>
 <header th:replace="~{fragments/commons::header}"></header>
 
+<input type="hidden" name="articleId" id="articleId" th:value="${articleDTO.id}">
+
 <section class="hero-wrap hero-wrap-2" style="background-image: url('/images/bg_2.jpg');"
          data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
@@ -67,100 +69,19 @@
 
 
                 <div class="pt-2 mt-2">
-                    <h3 class="mb-5">6 Comments</h3>
-                    <ul class="comment-list">
-                        <li class="comment">
-                            <div class="vcard bio">
-                                <img src="/images/person_1.jpg" alt="Image placeholder">
-                            </div>
-                            <div class="comment-body">
-                                <h3>John Doe</h3>
-                                <div class="meta">April 7, 2020 at 10:05pm</div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
-                                    necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente
-                                    iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                <p><a href="#" class="reply">Reply</a></p>
-                            </div>
-                        </li>
-
-                        <li class="comment">
-                            <div class="vcard bio">
-                                <img src="/images/person_1.jpg" alt="Image placeholder">
-                            </div>
-                            <div class="comment-body">
-                                <h3>John Doe</h3>
-                                <div class="meta">April 7, 2020 at 10:05pm</div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
-                                    necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente
-                                    iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                <p><a href="#" class="reply">Reply</a></p>
-                            </div>
-
-                            <ul class="children">
-                                <li class="comment">
-                                    <div class="vcard bio">
-                                        <img src="/images/person_1.jpg" alt="Image placeholder">
-                                    </div>
-                                    <div class="comment-body">
-                                        <h3>John Doe</h3>
-                                        <div class="meta">April 7, 2020 at 10:05pm</div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem
-                                            laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe
-                                            enim sapiente iste iure! Quam voluptas earum impedit necessitatibus,
-                                            nihil?</p>
-                                        <p><a href="#" class="reply">Reply</a></p>
-                                    </div>
-
-
-                                    <ul class="children">
-                                        <li class="comment">
-                                            <div class="vcard bio">
-                                                <img src="/images/person_1.jpg" alt="Image placeholder">
-                                            </div>
-                                            <div class="comment-body">
-                                                <h3>John Doe</h3>
-                                                <div class="meta">April 7, 2020 at 10:05pm</div>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur
-                                                    quidem laborum necessitatibus, ipsam impedit vitae autem, eum
-                                                    officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum
-                                                    impedit necessitatibus, nihil?</p>
-                                                <p><a href="#" class="reply">Reply</a></p>
-                                            </div>
-
-                                            <ul class="children">
-                                                <li class="comment">
-                                                    <div class="vcard bio">
-                                                        <img src="/images/person_1.jpg" alt="Image placeholder">
-                                                    </div>
-                                                    <div class="comment-body">
-                                                        <h3>John Doe</h3>
-                                                        <div class="meta">April 7, 2020 at 10:05pm</div>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Pariatur quidem laborum necessitatibus, ipsam impedit vitae
-                                                            autem, eum officia, fugiat saepe enim sapiente iste iure!
-                                                            Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                                        <p><a href="#" class="reply">Reply</a></p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="comment">
-                            <div class="vcard bio">
-                                <img src="/images/person_1.jpg" alt="Image placeholder">
-                            </div>
-                            <div class="comment-body">
-                                <h3>John Doe</h3>
-                                <div class="meta">April 7, 2020 at 10:05pm</div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
-                                    necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente
-                                    iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                <p><a href="#" class="reply">Reply</a></p>
-                            </div>
-                        </li>
+                    <h3 class="mb-5">Comments</h3>
+                    <ul id="comment-list" class="comment-list">
+<!--                        <li class="comment">-->
+<!--                            <div class="vcard bio">-->
+<!--                                <img src="/images/person_1.jpg" alt="Image placeholder">-->
+<!--                            </div>-->
+<!--                            <div class="comment-body">-->
+<!--                                <h3 th:text="${comment.authorName}">John Doe</h3>-->
+<!--                                <div th:text="${comment.published}" class="meta">April 7, 2020 at 10:05pm</div>-->
+<!--                                <p th:text="${comment.text}">text</p>-->
+<!--                                <p><a href="#" class="reply">Reply</a></p>-->
+<!--                            </div>-->
+<!--                        </li>-->
                     </ul>
                     <!-- END comment-list -->
                     <div class="comment-form-wrap pt-5">
@@ -171,14 +92,17 @@
                                     <img src="/images/anonymous-profile-pic.jpg" alt="Image placeholder">
                                 </div>
                                 <div class="comment-body">
-                                    <h3 sec:authentication="name">John Doe</h3>
-                                    <form action="#" class="pr-5 bg-light">
+                                    <h3 sec:authentication="name">Name</h3>
+                                    <form id="commentForm" class="pr-5 bg-light"
+                                          th:action="@{/blog/article/{id}/comments(id=${articleDTO.id})}"
+                                          method="POST">
                                         <div class="form-group">
                                             <label for="message">Message</label>
-                                            <textarea name="" id="message" cols="30" rows="2" class="form-control" style="resize: vertical"></textarea>
+                                            <textarea name="text" id="message" cols="30" rows="2" class="form-control" placeholder="Write your comment here"></textarea>
+                                            <small id="messageError" class="invalid-feedback">Comment should be at least 1 character long!</small>
                                         </div>
                                         <div class="form-group">
-                                            <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+                                            <input id="postComment" type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
                                         </div>
                                     </form>
                                 </div>
@@ -223,7 +147,7 @@
                                     Created</a></div>
                                 <div><a th:text="${article.getAuthorName()}"><span class="icon-person"></span>
                                     Author</a></div>
-                                <div><a th:text="${article.getComments().size()}"><span class="icon-chat"></span>
+                                <div><a th:text="| ${article.getComments().size()}|" class="fa fa-comment"><span class="icon-chat"></span>
                                     Comments</a></div>
                             </div>
                         </div>
@@ -243,12 +167,12 @@
                     </div>
                 </div>
 
-                <div class="sidebar-box ftco-animate">
-                    <h3>Paragraph</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus
-                        voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur
-                        similique, inventore eos fugit cupiditate numquam!</p>
-                </div>
+<!--                <div class="sidebar-box ftco-animate">-->
+<!--                    <h3>Paragraph</h3>-->
+<!--                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus-->
+<!--                        voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur-->
+<!--                        similique, inventore eos fugit cupiditate numquam!</p>-->
+<!--                </div>-->
             </div>
 
         </div>
@@ -274,8 +198,8 @@
 <script src="/js/jquery.timepicker.min.js"></script>
 <script src="/js/owl.carousel.min.js"></script>
 <script src="/js/jquery.magnific-popup.min.js"></script>
-<script src="/js/scrollax.min.js"></script>
 <script src="/js/main.js"></script>
+<script src="/js/comments.js"></script>
 
 
 </body>

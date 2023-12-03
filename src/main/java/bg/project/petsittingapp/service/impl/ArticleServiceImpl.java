@@ -7,6 +7,7 @@ import bg.project.petsittingapp.model.entity.Article;
 import bg.project.petsittingapp.model.entity.Image;
 import bg.project.petsittingapp.repository.ArticleRepository;
 import bg.project.petsittingapp.service.ArticleService;
+import bg.project.petsittingapp.service.CommentService;
 import bg.project.petsittingapp.service.ImageService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,13 @@ import java.util.stream.Collectors;
 public class ArticleServiceImpl implements ArticleService {
     private static final String FOLDER_PATH = "articlePictures/";
     private final ArticleRepository articleRepository;
+    private final CommentService commentService;
     private final ImageService imageService;
     private final ModelMapper modelMapper;
 
-    public ArticleServiceImpl(ArticleRepository articleRepository, ImageService imageService, ModelMapper modelMapper) {
+    public ArticleServiceImpl(ArticleRepository articleRepository, CommentService commentService, ImageService imageService, ModelMapper modelMapper) {
         this.articleRepository = articleRepository;
+        this.commentService = commentService;
         this.imageService = imageService;
         this.modelMapper = modelMapper;
     }
@@ -131,6 +134,8 @@ public class ArticleServiceImpl implements ArticleService {
         String date = article.getCreated().format(pattern);
 
         articleDTO.setCreated(date);
+
+        articleDTO.setComments(commentService.getComments(article.getId()));
 
         return articleDTO;
     }

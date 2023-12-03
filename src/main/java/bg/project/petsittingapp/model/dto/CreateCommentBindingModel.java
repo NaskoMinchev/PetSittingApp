@@ -1,21 +1,21 @@
 package bg.project.petsittingapp.model.dto;
 
-public class CommentDTO {
-    private Long id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+import java.time.LocalDateTime;
+
+public class CreateCommentBindingModel {
+
     private String authorName;
+    @NotBlank
+    @Size(min = 1)
     private String text;
-    private String published;
+    private LocalDateTime published;
     private Long articleId;
 
-    public CommentDTO() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public CreateCommentBindingModel() {
+        this.published = LocalDateTime.now();
     }
 
     public String getAuthorName() {
@@ -34,11 +34,11 @@ public class CommentDTO {
         this.text = text;
     }
 
-    public String getPublished() {
+    public LocalDateTime getPublished() {
         return published;
     }
 
-    public void setPublished(String published) {
+    public void setPublished(LocalDateTime published) {
         this.published = published;
     }
 
