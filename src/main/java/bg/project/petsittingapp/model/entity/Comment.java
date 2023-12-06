@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "comments")
 public class Comment extends BaseEntity {
-    @ManyToOne(optional = false)
-    private User author;
+    private String authorName;
     @Column
     private String text;
     @Column(nullable = false)
@@ -21,13 +20,12 @@ public class Comment extends BaseEntity {
 
     public Comment() {
     }
-
-    public User getAuthor() {
-        return author;
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public void setAuthor(String authorName) {
+        this.authorName = authorName;
     }
 
     public String getText() {

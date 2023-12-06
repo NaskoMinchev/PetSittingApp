@@ -34,7 +34,8 @@ public class CommentRestController {
                                                  @PathVariable("id") Long id,
                                                  @RequestBody @Valid CreateCommentBindingModel createCommentBindingModel) {
 
-        CommentDTO commentDTO = commentService.createComment(createCommentBindingModel, id, principal.getName());
+        createCommentBindingModel.setAuthorName(principal.getName());
+        CommentDTO commentDTO = commentService.createComment(createCommentBindingModel, id);
         commentDTO.setAuthorName(principal.getName());
         commentDTO.setArticleId(id);
 

@@ -34,15 +34,14 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public CommentDTO createComment(CreateCommentBindingModel createCommentBindingModel, Long id, String authorName) {
+    public CommentDTO createComment(CreateCommentBindingModel createCommentBindingModel, Long id) {
         Article article = articleRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Article with id " + createCommentBindingModel.getArticleId() + " not found!"));
 
-        User user = userRepository.findByUsername(authorName)
-                .orElseThrow(() -> new NoSuchElementException("User with username " + createCommentBindingModel.getAuthorName() + " not found!"));
+//        User user = userRepository.findByUsername(createCommentBindingModel.getAuthorName())
+//                .orElseThrow(() -> new NoSuchElementException("User with username " + createCommentBindingModel.getAuthorName() + " not found!"));
 
         Comment comment = modelMapper.map(createCommentBindingModel, Comment.class);
-        comment.setAuthor(user);
         comment.setArticle(article);
 
         commentRepository.saveAndFlush(comment);
@@ -65,9 +64,14 @@ public class CommentServiceImpl implements CommentService {
         return comments;
     }
 
+    @Override
+    public void deleteAllArticleComments(Long id) {
+        List<Comment> commentsToDelete = commentRepository.findAllByArticleId(id);
+        commentRepository.deleteAll(commentsToDelete);
+    }
+
     private CommentDTO commentMap(Comment comment) {
         CommentDTO commentDTO = modelMapper.map(comment, CommentDTO.class);
-        commentDTO.setAuthorName(comment.getAuthor().getUsername());
 
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String formattedDate = comment.getPublished().format(pattern);

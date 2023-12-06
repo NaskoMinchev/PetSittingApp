@@ -77,9 +77,8 @@
               </div>
               <div class="col-md-12">
                 <div class="form-group">
-                  <a th:if="${userDTO.id}==1" th:href="@{/user/all}" class="btn btn-primary">Back</a>
-
-                  <input th:unless="${userDTO.id}==1" type="submit" value="Save User" class="btn btn-primary">
+                  <input th:unless="${userDTO.id}==1" type="submit" value="Save User" class="btn btn-danger mr-2">
+                  <a th:href="@{/user/all}" class="btn btn-primary">Back</a>
                   <div class="submitting"></div>
                 </div>
               </div>

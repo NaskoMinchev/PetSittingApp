@@ -64,13 +64,7 @@ public class BlogController {
     public ModelAndView createArticle(@ModelAttribute("createArticleDTO") @Valid CreateArticleDTO createArticleDTO,
                                       BindingResult bindingResult, Principal principal) {
 
-        Optional<User> user = userService.findByUsername(principal.getName());
-
-        if (user.isPresent()) {
-            createArticleDTO.setAuthor(user.get());
-        } else {
-            throw new NoSuchElementException("No such user");
-        }
+        createArticleDTO.setAuthor(principal.getName());
 
         if (bindingResult.hasErrors()) {
             return new ModelAndView("blog-create");

@@ -77,7 +77,11 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public void deleteArticle(Long id) {
-        articleRepository.deleteById(id);
+        commentService.deleteAllArticleComments(id);
+        Article article = articleRepository.findById(id).get();
+        article.setComments(null);
+        articleRepository.save(article);
+        articleRepository.delete(article);
     }
 
     @Override
@@ -128,7 +132,6 @@ public class ArticleServiceImpl implements ArticleService {
 
     private ArticleDTO articleMap(Article article) {
         ArticleDTO articleDTO = modelMapper.map(article, ArticleDTO.class);
-        articleDTO.setAuthorName(article.getAuthor().getUsername());
 
         DateTimeFormatter pattern = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
         String date = article.getCreated().format(pattern);

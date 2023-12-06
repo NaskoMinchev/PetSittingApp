@@ -1,6 +1,7 @@
 package bg.project.petsittingapp.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,15 +15,14 @@ public class Article extends BaseEntity {
     private String header;
     @Column(nullable = false, columnDefinition = "longtext")
     private String body;
-
     @Column(columnDefinition = "longtext")
     private String additionalInfo;
     @Column(nullable = false, columnDefinition = "text")
     private String footer;
     @OneToOne(optional = false)
     private Image image;
-    @ManyToOne(optional = false)
-    private User author;
+    @NotNull
+    private String author;
     @Column(nullable = false)
     private LocalDate created;
     @OneToMany(fetch = FetchType.EAGER)
@@ -79,11 +79,11 @@ public class Article extends BaseEntity {
         this.image = image;
     }
 
-    public User getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 

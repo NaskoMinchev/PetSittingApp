@@ -23,7 +23,7 @@ public class CreateArticleDTO {
     private String footer;
     @ImageAnnotation(contentTypes = {"image/jpeg", "image/png"})
     private MultipartFile picture;
-    private User author;
+    private String author;
     @NotNull
     private LocalDate created;
 
@@ -79,11 +79,11 @@ public class CreateArticleDTO {
         this.picture = picture;
     }
 
-    public User getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 

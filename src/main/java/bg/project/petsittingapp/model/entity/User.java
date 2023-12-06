@@ -68,3 +68,4 @@ public class User extends BaseEntity {
         this.roles.add(role);
     }
 }
+

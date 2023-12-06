@@ -15,7 +15,7 @@ public class ArticleDTO {
     private Image image;
     private MultipartFile picture;
     private String created;
-    private String authorName;
+    private String author;
     private List<CommentDTO> comments;
 
     public ArticleDTO() {
@@ -93,12 +93,12 @@ public class ArticleDTO {
         this.created = created;
     }
 
-    public String getAuthorName() {
-        return authorName;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public List<CommentDTO> getComments() {

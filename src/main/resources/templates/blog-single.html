@@ -60,7 +60,7 @@
                         <img src="/images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
                     </div>
                     <div class="desc">
-                        <h3 th:text="${articleDTO.getAuthorName()}">name</h3>
+                        <h3 th:text="${articleDTO.getAuthor()}">name</h3>
                         <p>Pets are a great blessing in anyone’s life. They are the only ones who love us unconditionally.
                             Pets always offer us everything they have without asking for anything in return.
                             The main aim of any pet’s life is to make their owner happy!</p>
@@ -145,7 +145,7 @@
                             <div class="meta">
                                 <div><a th:text="${article.getCreated()}"><span class="icon-calendar"></span>
                                     Created</a></div>
-                                <div><a th:text="${article.getAuthorName()}"><span class="icon-person"></span>
+                                <div><a th:text="${article.getAuthor()}"><span class="icon-person"></span>
                                     Author</a></div>
                                 <div><a th:text="| ${article.getComments().size()}|" class="fa fa-comment"><span class="icon-chat"></span>
                                     Comments</a></div>

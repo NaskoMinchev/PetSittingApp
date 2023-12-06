@@ -64,7 +64,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @GetMapping("/user/update/{id}")
+    @GetMapping("/user/edit/{id}")
     public ModelAndView editUser(@PathVariable("id") Long id) {
 
         ModelAndView modelAndView = new ModelAndView("user-edit");
