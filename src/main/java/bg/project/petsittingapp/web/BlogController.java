@@ -3,7 +3,6 @@ package bg.project.petsittingapp.web;
 import bg.project.petsittingapp.model.dto.ArticleDTO;
 import bg.project.petsittingapp.model.dto.BlogDTO;
 import bg.project.petsittingapp.model.dto.CreateArticleDTO;
-import bg.project.petsittingapp.model.entity.User;
 import bg.project.petsittingapp.service.ArticleService;
 import bg.project.petsittingapp.service.UserService;
 import jakarta.validation.Valid;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Controller
 public class BlogController {

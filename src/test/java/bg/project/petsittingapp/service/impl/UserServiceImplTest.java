@@ -1,12 +1,12 @@
 package bg.project.petsittingapp.service.impl;
 
+import bg.project.petsittingapp.model.dto.UserDTO;
 import bg.project.petsittingapp.model.dto.UserRegisterBindingModel;
 import bg.project.petsittingapp.model.entity.User;
 import bg.project.petsittingapp.model.entity.UserRole;
 import bg.project.petsittingapp.model.enums.RoleEnum;
 import bg.project.petsittingapp.repository.UserRepository;
 import bg.project.petsittingapp.repository.UserRoleRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +16,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
@@ -23,7 +25,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class UserServiceImplTest {
 
-    private UserServiceImpl serviceToTest;
+    private UserServiceImpl userServiceToTest;
     @Mock
     private UserRepository mockUserRepository;
     @Mock
@@ -35,12 +37,7 @@ public class UserServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        serviceToTest = new UserServiceImpl(mockUserRepository, mockUserRoleRepository, mockPasswordEncoder, mockModelMapper);
-    }
-
-    @AfterEach
-    void tearDown() {
-        mockUserRepository.deleteAll();
+        userServiceToTest = new UserServiceImpl(mockUserRepository, mockUserRoleRepository, mockPasswordEncoder, mockModelMapper);
     }
 
     @Test
@@ -51,7 +48,7 @@ public class UserServiceImplTest {
         userRegisterBindingModel.setConfirmPassword("12345");
         userRegisterBindingModel.setEmail("email@email");
 
-        Assertions.assertFalse(serviceToTest.register(userRegisterBindingModel));
+        Assertions.assertFalse(userServiceToTest.register(userRegisterBindingModel));
     }
 
     @Test
@@ -63,7 +60,7 @@ public class UserServiceImplTest {
         UserRegisterBindingModel userRegisterBindingModel = createUserRegisterBindingModel();
 
 
-        boolean register = serviceToTest.register(userRegisterBindingModel);
+        boolean register = userServiceToTest.register(userRegisterBindingModel);
 
         Assertions.assertFalse(register);
     }
@@ -87,11 +84,74 @@ public class UserServiceImplTest {
         when(mockUserRoleRepository.findByRole(RoleEnum.USER)).thenReturn(Optional.of(userRole));
         when(mockUserRoleRepository.findByRole(RoleEnum.ADMIN)).thenReturn(Optional.of(adminRole));
 
-        boolean register = serviceToTest.register(userRegisterBindingModel);
+        boolean register = userServiceToTest.register(userRegisterBindingModel);
 
         Assertions.assertTrue(register);
     }
 
+    @Test
+    void findUserByUsernameTestSuccess() {
+        User user = createUser();
+
+        when(mockUserRepository.findByUsername(user.getUsername())).thenReturn(Optional.of(user));
+
+
+        Assertions.assertEquals(Optional.of(user), userServiceToTest.findByUsername(user.getUsername()));
+    }
+
+    @Test
+    void findAllUsersTest() {
+        List<User> users = new ArrayList<>();
+
+        User user = createUser();
+        users.add(user);
+
+        when(mockUserRepository.findAll()).thenReturn(users);
+
+        Assertions.assertEquals(users, userServiceToTest.findAllUsers());
+    }
+
+    @Test
+    void findByIdTest() {
+        Assertions.assertNull(userServiceToTest.findById(123L));
+        Assertions.assertNull(userServiceToTest.findById(-123L));
+    }
+
+    @Test
+    void deleteUserTest() {
+        userServiceToTest.deleteUser(1111L);
+    }
+
+    @Test
+    void saveEditedUserTest() {
+        List<UserRole> roles = new ArrayList<>();
+
+        UserRole role1 = new UserRole();
+        role1.setId(2L);
+        role1.setRole(RoleEnum.USER);
+        roles.add(role1);
+
+        UserDTO userDto = new UserDTO();
+        userDto.setId(1L);
+        userDto.setUsername("test");
+        userDto.setEmail("email@email");
+        userDto.setRoles(roles);
+
+        User user = new User();
+        user.setId(1L);
+        user.setUsername("testUser");
+        user.setEmail("test@test");
+
+        when(mockUserRepository.findById(1L))
+                .thenReturn(Optional.of(user));
+
+        when(mockUserRoleRepository.findByRole(RoleEnum.USER))
+                .thenReturn(Optional.of(role1));
+
+        userServiceToTest.saveEditedUser(userDto);
+
+        Assertions.assertTrue(user.getRoles().contains(role1));
+    }
     private static UserRegisterBindingModel createUserRegisterBindingModel() {
         UserRegisterBindingModel userRegisterBindingModel = new UserRegisterBindingModel();
         userRegisterBindingModel.setUsername("test");

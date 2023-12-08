@@ -23,13 +23,11 @@ import java.util.stream.Collectors;
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final ArticleRepository articleRepository;
-    private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
-    public CommentServiceImpl(CommentRepository commentRepository, ArticleRepository articleRepository, UserRepository userRepository, ModelMapper modelMapper) {
+    public CommentServiceImpl(CommentRepository commentRepository, ArticleRepository articleRepository, ModelMapper modelMapper) {
         this.commentRepository = commentRepository;
         this.articleRepository = articleRepository;
-        this.userRepository = userRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -37,9 +35,6 @@ public class CommentServiceImpl implements CommentService {
     public CommentDTO createComment(CreateCommentBindingModel createCommentBindingModel, Long id) {
         Article article = articleRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Article with id " + createCommentBindingModel.getArticleId() + " not found!"));
-
-//        User user = userRepository.findByUsername(createCommentBindingModel.getAuthorName())
-//                .orElseThrow(() -> new NoSuchElementException("User with username " + createCommentBindingModel.getAuthorName() + " not found!"));
 
         Comment comment = modelMapper.map(createCommentBindingModel, Comment.class);
         comment.setArticle(article);
