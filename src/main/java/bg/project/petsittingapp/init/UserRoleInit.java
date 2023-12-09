@@ -1,4 +1,4 @@
-package bg.project.petsittingapp.Init;
+package bg.project.petsittingapp.init;
 
 import bg.project.petsittingapp.model.entity.UserRole;
 import bg.project.petsittingapp.model.enums.RoleEnum;

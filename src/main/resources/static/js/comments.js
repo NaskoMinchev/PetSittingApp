@@ -80,7 +80,7 @@ function asComment(c) {
     commentHtml += `<div class="comment-body">
         <h3>${c.authorName}</h3>
         <div class="meta">${c.published}</div>
-        <p>${c.text}</p>
+        <p class="bg-white">${c.text}</p>
                     </div>`
 
     return commentHtml

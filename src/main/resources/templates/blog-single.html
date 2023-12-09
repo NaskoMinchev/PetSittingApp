@@ -34,10 +34,10 @@
                     <img th:src="@{'/images/' + ${articleDTO.getImage().getImageUrl()}}" alt="image" class="img-fluid">
                 </p>
                 <h2 th:text="${articleDTO.title}" class="mb-3">Title</h2>
-                <p style="text-indent: 50px" th:text="${articleDTO.header}">Header</p>
+                <p th:text="${articleDTO.header}">Header</p>
                 <p style="text-indent: 50px" th:text="${articleDTO.body}">Body</p>
                 <p style="text-indent: 50px" th:text="${articleDTO.additionalInfo}">Body</p>
-                <p style="text-indent: 50px" th:text="${articleDTO.footer}">Footer</p>
+                <p th:text="${articleDTO.footer}">Footer</p>
 
                 <div sec:authorize="hasRole('ADMIN')" class="container row d-flex">
                     <form th:method="DELETE" th:action="@{/blog/article/delete/{id}(id=${articleDTO.getId()})}">

@@ -24,6 +24,7 @@ public class SecurityConfig {
                             .requestMatchers("/fonts/**").permitAll()
                             .requestMatchers("/", "/login", "/register", "/about", "/services", "/contact", "/contact/send","/gallery", "/login-error").permitAll()
                             .requestMatchers("/error").permitAll()
+                            .requestMatchers("/maintenance").permitAll()
                             .requestMatchers("/blog/create", "/blog/article/edit/{id}",
                                     "/blog/article/delete/{id}", "/user/all", "/user/edit/{id}", "/user/delete/{id}", "/pet/add").hasRole(RoleEnum.ADMIN.name())
                             .anyRequest().authenticated()
